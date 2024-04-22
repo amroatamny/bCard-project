@@ -1,6 +1,9 @@
 import React from "react";
 import "./App.css";
-import StyleTest from "./sandbox/components/styles/StyleTest";
+// import CardBody from "./cards/components/card/CardBody";
+// import StyleTest from "./sandbox/components/styles/StyleTest";
+// import MuiTypography from "./sandbox/mui-sandbox/data-display/MuiTypography";
+import CardJ from "./cards/components/card/Card";
 // import Test from "./sandbox/components/Test";
 // import Logic from "./sandbox/components/Logic";
 // import StringInterpolation from "./sandbox/components/StringInterpolation";
@@ -19,7 +22,10 @@ function App() {
       {/* <StringIntDemo /> */}
       {/* <Style /> */}
       {/* <StyleModule /> */}
-      <StyleTest />
+      {/* <StyleTest /> */}
+      {/* <MuiTypography /> */}
+      {/* <CardBody /> */}
+      <CardJ />
     </div>
   );
 }
