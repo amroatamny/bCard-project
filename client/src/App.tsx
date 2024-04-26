@@ -1,6 +1,11 @@
 import React from "react";
 import "./App.css";
-import Loops from "./sandbox/iterations/Loops";
+import CardsPage from "./cards/pages/CardsPage";
+// import OnClick from "./sandbox/events/OnClick";
+// import RaisingEvents from "./sandbox/events/RaisingEvents";
+// import Loops from "./sandbox/iterations/Loops";
+// import Cards from "./cards/components/Cards";
+
 // import CardBody from "./cards/components/card/CardBody";
 // import StyleTest from "./sandbox/components/styles/StyleTest";
 // import MuiTypography from "./sandbox/mui-sandbox/data-display/MuiTypography";
@@ -33,7 +38,11 @@ function App() {
       {/* <FatherPropsString /> */}
       {/* <FatherPropsObject /> */}
       {/* <PropsTs /> */}
-      <Loops />
+      {/* <Loops /> */}
+      {/* <Cards /> */}
+      {/* <OnClick /> */}
+      {/* <RaisingEvents /> */}
+      <CardsPage />
     </div>
   );
 }

@@ -18,15 +18,15 @@ const CardBody: React.FC<Props> = ({ card }) => {
 
       <Divider />
       <Box mt={1}>
-        <CardBodyRow card={{ title: "phone", content: card.phone }} />
+        <CardBodyRow card={{ title: "phone:", content: card.phone }} />
         <CardBodyRow
           card={{
-            title: "address",
+            title: "address:",
             content: `${card.address.city} ${card.address.street}  ${card.address.houseNumber}`,
           }}
         />
         <CardBodyRow
-          card={{ title: "cardNumber", content: String(card.bizNumber) }}
+          card={{ title: "cardNumber:", content: String(card.bizNumber) }}
         />
       </Box>
     </CardContent>
