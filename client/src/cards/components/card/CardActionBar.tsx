@@ -9,9 +9,11 @@ type Props = {
   onDelete: (id: string) => void;
   onLike: (id: string) => void;
   cardId: string;
-  onEdit: (id: string) => void;
 };
-const CardBar: React.FC<Props> = ({ onDelete, onLike, cardId, onEdit }) => {
+const CardBar: React.FC<Props> = ({ onDelete, onLike, cardId }) => {
+  const handleCardEdit = () => {
+    console.log(`you move to card edit no.${cardId}`);
+  };
   return (
     <CardActions disableSpacing sx={{ pt: 0, justifyContent: "space-between" }}>
       <Box>
@@ -19,7 +21,7 @@ const CardBar: React.FC<Props> = ({ onDelete, onLike, cardId, onEdit }) => {
           <DeleteIcon />
         </IconButton>
 
-        <IconButton onClick={() => onEdit(cardId)} aria-label="edit">
+        <IconButton onClick={handleCardEdit} aria-label="edit">
           <EditIcon />
         </IconButton>
       </Box>

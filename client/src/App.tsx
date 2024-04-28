@@ -1,6 +1,13 @@
 import React from "react";
 import "./App.css";
-import CardsPage from "./cards/pages/CardsPage";
+import SetPost from "./sandbox/use-state/SetPost";
+// import UseStateWithArrayOfObjects from "./sandbox/use-state/UseStateWithArrayOfObjects";
+// import UseStateWithObject from "./sandbox/use-state/UseStateWithObject";
+// import CardsPage from "./cards/pages/CardsPage";
+// import ErrorPage from "./pages/ErrorPage";
+// import AboutPage from "./pages/AboutPage";
+// import UseState from "./sandbox/use-state/UseState";
+
 // import OnClick from "./sandbox/events/OnClick";
 // import RaisingEvents from "./sandbox/events/RaisingEvents";
 // import Loops from "./sandbox/iterations/Loops";
@@ -42,7 +49,13 @@ function App() {
       {/* <Cards /> */}
       {/* <OnClick /> */}
       {/* <RaisingEvents /> */}
-      <CardsPage />
+      {/* <CardsPage /> */}
+      {/* <ErrorPage /> */}
+      {/* <AboutPage /> */}
+      {/* <UseState /> */}
+      <SetPost />
+      {/* <UseStateWithObject /> */}
+      {/* <UseStateWithArrayOfObjects /> */}
     </div>
   );
 }

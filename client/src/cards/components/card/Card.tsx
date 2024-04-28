@@ -9,19 +9,13 @@ type Props = {
   card: CardInterface;
   onDelete: (id: string) => void;
   onLike: (id: string) => void;
-  onEdit: (id: string) => void;
 };
-const Card: React.FC<Props> = ({ card, onDelete, onLike, onEdit }) => {
+const Card: React.FC<Props> = ({ card, onDelete, onLike }) => {
   return (
     <MuiCard sx={{ minWidth: 280 }}>
       <CardHead image={card.image} />
       <CardBody card={card} />
-      <CardBar
-        cardId={card._id}
-        onEdit={onEdit}
-        onLike={onLike}
-        onDelete={onDelete}
-      />
+      <CardBar cardId={card._id} onLike={onLike} onDelete={onDelete} />
     </MuiCard>
   );
 };

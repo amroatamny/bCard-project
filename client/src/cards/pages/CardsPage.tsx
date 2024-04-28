@@ -82,7 +82,7 @@ const CardsPage = () => {
     <>
       <PageHeader
         title="Cards page"
-        subtitle="here you can find all type of busnies cads"
+        subtitle="here you can find all type of business cads"
       />
       <Cards cards={cards} />
     </>
