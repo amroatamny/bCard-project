@@ -1,9 +1,11 @@
 import React from "react";
 import "./App.css";
-import SetPost from "./sandbox/use-state/SetPost";
+import Layout from "./layout/Layout";
+// import MuiAppBar from "./sandbox/navigations/MuiAppBar";
+// import SetPost from "./sandbox/use-state/SetPost";
 // import UseStateWithArrayOfObjects from "./sandbox/use-state/UseStateWithArrayOfObjects";
 // import UseStateWithObject from "./sandbox/use-state/UseStateWithObject";
-// import CardsPage from "./cards/pages/CardsPage";
+import CardsPage from "./cards/pages/CardsPage";
 // import ErrorPage from "./pages/ErrorPage";
 // import AboutPage from "./pages/AboutPage";
 // import UseState from "./sandbox/use-state/UseState";
@@ -32,30 +34,35 @@ import SetPost from "./sandbox/use-state/SetPost";
 function App() {
   return (
     <div className="App">
-      {/* <Babel />*/}
-      {/* <Test /> */}
-      {/* <Logic /> */}
-      {/* <StringIntDemo /> */}
-      {/* <Style /> */}
-      {/* <StyleModule /> */}
-      {/* <StyleTest /> */}
-      {/* <MuiTypography /> */}
-      {/* <CardBody /> */}
-      {/* <Card /> */}
-      {/* <FatherPropsString /> */}
-      {/* <FatherPropsObject /> */}
-      {/* <PropsTs /> */}
-      {/* <Loops /> */}
-      {/* <Cards /> */}
-      {/* <OnClick /> */}
-      {/* <RaisingEvents /> */}
-      {/* <CardsPage /> */}
-      {/* <ErrorPage /> */}
-      {/* <AboutPage /> */}
-      {/* <UseState /> */}
-      <SetPost />
-      {/* <UseStateWithObject /> */}
-      {/* <UseStateWithArrayOfObjects /> */}
+      <Layout>
+        {/* <Babel />*/}
+        {/* <Test /> */}
+        {/* <Logic /> */}
+        {/* <StringIntDemo /> */}
+        {/* <Style /> */}
+        {/* <StyleModule /> */}
+        {/* <StyleTest /> */}
+        {/* <MuiTypography /> */}
+        {/* <CardBody /> */}
+        {/* <Card /> */}
+        {/* <FatherPropsString /> */}
+        {/* <FatherPropsObject /> */}
+        {/* <PropsTs /> */}
+        {/* <Loops /> */}
+        {/* <Cards /> */}
+        {/* <OnClick /> */}
+        {/* <RaisingEvents /> */}
+
+        {/* <ErrorPage /> */}
+        {/* <AboutPage /> */}
+        {/* <UseState /> */}
+        {/* <SetPost /> */}
+        {/* <UseStateWithObject /> */}
+        {/* <UseStateWithArrayOfObjects /> */}
+        {/* <Layout>From app</Layout> */}
+        {/* <MuiAppBar /> */}
+        <CardsPage />
+      </Layout>
     </div>
   );
 }

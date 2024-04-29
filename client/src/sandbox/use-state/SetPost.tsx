@@ -4,17 +4,17 @@ interface post {
   title: string;
   subtitle: string;
   author: string;
-  cratedAt: any;
+  cratedAt: string | Date;
 }
 
 type Event = MouseEvent<HTMLButtonElement>;
 
 const SetPost = () => {
-  const INITIAL_POST = {
+  const INITIAL_POST: post = {
     title: "",
     subtitle: "",
     author: "",
-    cratedAt: `${new Date()}`,
+    cratedAt: "",
   };
 
   const [isLogged, setIsLogged] = useState(false);
@@ -23,7 +23,7 @@ const SetPost = () => {
 
   const createNewPost = (e: Event) => {
     e.preventDefault();
-    setPosts((prev) => [...prev, post]);
+    setPosts((prev) => [...prev, { ...post, cratedAt: new Date() }]);
     return setPost(INITIAL_POST);
   };
   return (
@@ -74,7 +74,7 @@ const SetPost = () => {
           <br />
           <button
             onClick={createNewPost}
-            disabled={!post.title && !post.author && !post.subtitle}
+            disabled={!post.title || !post.author || !post.subtitle}
           >
             {" "}
             create new post{" "}
@@ -86,7 +86,7 @@ const SetPost = () => {
                 <p>title: {post.title}</p>
                 <p>subtitle: {post.subtitle}</p>
                 <p>author: {post.author}</p>
-                <p>date: {post.cratedAt}</p>
+                <p>date: {post.cratedAt.toLocaleString()}</p>
               </li>
             ))}
           </ul>
