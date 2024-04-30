@@ -4,7 +4,6 @@ import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import { func } from "prop-types";
 
 const MoreButton = () => {
   return (
@@ -19,10 +18,6 @@ const MoreButton = () => {
       </IconButton>
     </Box>
   );
-};
-
-MoreButton.propTypes = {
-  onClick: func.isRequired,
 };
 
 export default MoreButton;

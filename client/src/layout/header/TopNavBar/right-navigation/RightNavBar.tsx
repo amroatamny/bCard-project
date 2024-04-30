@@ -10,7 +10,7 @@ import NotLogged from "./NotLogged";
 
 const RightNavBar = () => {
   // const user = true
-  const user = true;
+  const user = false;
 
   return (
     <>
@@ -27,7 +27,7 @@ const RightNavBar = () => {
         {user && <Logged />}
       </Box>
 
-      <MoreButton onClick={() => console.log("you clicked The more button!")} />
+      <MoreButton />
     </>
   );
 };
