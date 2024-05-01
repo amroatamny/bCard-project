@@ -10,7 +10,7 @@ type Props = {
   onLike: (id: string) => void;
   cardId: string;
 };
-const CardBar: React.FC<Props> = ({ onDelete, onLike, cardId }) => {
+const CardActionBar: React.FC<Props> = ({ onDelete, onLike, cardId }) => {
   const handleCardEdit = () => {
     console.log(`you move to card edit no.${cardId}`);
   };
@@ -42,4 +42,4 @@ const CardBar: React.FC<Props> = ({ onDelete, onLike, cardId }) => {
   );
 };
 
-export default CardBar;
+export default CardActionBar;

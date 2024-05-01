@@ -1,13 +1,15 @@
 import React from "react";
-import PageHeader from "../../components/PageHeader";
-import Cards from "../components/Cards";
-import CardInterface from "../interface/CardInterface";
 import { Container } from "@mui/material";
+import PageHeader from "../../components/PageHeader";
+import { useParams } from "react-router-dom";
+import CardInterface from "../interface/CardInterface";
+import Card from "../components/card/Card";
 
-const CardsPage = () => {
+const CardDetailsPage = () => {
+  const { cardId } = useParams();
   const cards: CardInterface[] = [
     {
-      _id: "028374643 ",
+      _id: "028374643",
       title: "first",
       subtitle: "subtitle",
       description: "test 123",
@@ -21,7 +23,7 @@ const CardsPage = () => {
         state: "hola",
         country: "baqa",
         city: "tel-aviv",
-        street: "rothcheld",
+        street: "baqa",
         houseNumber: 21,
         zip: 30100,
       },
@@ -31,7 +33,7 @@ const CardsPage = () => {
       createdAt: new Date(),
     },
     {
-      _id: "213727969 ",
+      _id: "213727969",
       title: "first",
       subtitle: "subtitle",
       description: "test 123",
@@ -45,7 +47,7 @@ const CardsPage = () => {
         state: "hola",
         country: "baqa",
         city: "tel-aviv",
-        street: "rothcheld",
+        street: "jatt",
         houseNumber: 21,
         zip: 30100,
       },
@@ -55,7 +57,7 @@ const CardsPage = () => {
       createdAt: new Date(),
     },
     {
-      _id: "000000000 ",
+      _id: "000000000",
       title: "first",
       subtitle: "subtitle",
       description: "test 123",
@@ -79,15 +81,18 @@ const CardsPage = () => {
       createdAt: new Date(),
     },
   ];
+  let card = cards.filter((card: CardInterface) => card._id === cardId);
+  if (!card.length) return <p>no card found ...</p>;
   return (
     <Container>
       <PageHeader
-        title="Cards page"
-        subtitle="here you can find all type of business cards"
+        title="Business Details"
+        subtitle="Here you can see details of the business"
       />
-      <Cards cards={cards} />
+      <div>dd :{cardId}</div>
+      <Card card={card[0]} onDelete={console.log} onLike={console.log} />
     </Container>
   );
 };
 
-export default CardsPage;
+export default CardDetailsPage;

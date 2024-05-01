@@ -15,23 +15,12 @@ const LeftNavBar = () => {
 
       <Box sx={{ display: { xs: "none", md: "inline-flex" } }}>
         <NavItem label="about" to={ROUTES.ABOUT} />
-        {/* <Button color="inherit">
-          <Typography>About</Typography>
-        </Button> */}
 
         <NavItem label="My Cards" to={ROUTES.MY_CARDS} />
 
-        {/* <Button color="inherit">
-          <Typography>My Cards</Typography>
-        </Button> */}
         <NavItem label="Fav Cards" to={ROUTES.FAV_CARDS} />
-        {/* <Button color="inherit">
-          <Typography>Fav Cards</Typography>
-        </Button> */}
+
         <NavItem label="Sandbox" to={ROUTES.SANDBOX} />
-        {/* <Button color="inherit">
-          <Typography>Sandbox</Typography>
-        </Button> */}
       </Box>
     </Box>
   );
