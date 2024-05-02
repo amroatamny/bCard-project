@@ -4,20 +4,19 @@ import NavItem from "../../layout/components/NavItem";
 import { SANDBOX_ROUTES_SONS } from "../../routes/routesModel";
 import { Outlet } from "react-router-dom";
 
-const ComponentMenu = () => {
+const EventsMenu = () => {
   return (
     <>
       <AppBar position="sticky" color="secondary">
         <Toolbar>
           <NavItem
-            label="template"
-            to={SANDBOX_ROUTES_SONS.TEMPLATE}
+            label="event"
+            to={SANDBOX_ROUTES_SONS.EVENT_RAISING_EVENT}
             color="black"
           />
-          <NavItem label="logic" to={SANDBOX_ROUTES_SONS.LOGIC} color="black" />
           <NavItem
-            label="styles"
-            to={SANDBOX_ROUTES_SONS.STYLES}
+            label="onClick"
+            to={SANDBOX_ROUTES_SONS.EVENT_ONCLICK}
             color="black"
           />
         </Toolbar>
@@ -27,4 +26,4 @@ const ComponentMenu = () => {
   );
 };
 
-export default ComponentMenu;
+export default EventsMenu;

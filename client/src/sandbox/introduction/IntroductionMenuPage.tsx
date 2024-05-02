@@ -4,20 +4,14 @@ import NavItem from "../../layout/components/NavItem";
 import { SANDBOX_ROUTES_SONS } from "../../routes/routesModel";
 import { Outlet } from "react-router-dom";
 
-const ComponentMenu = () => {
+const IntroductionMenuPage = () => {
   return (
     <>
       <AppBar position="sticky" color="secondary">
         <Toolbar>
           <NavItem
-            label="template"
-            to={SANDBOX_ROUTES_SONS.TEMPLATE}
-            color="black"
-          />
-          <NavItem label="logic" to={SANDBOX_ROUTES_SONS.LOGIC} color="black" />
-          <NavItem
-            label="styles"
-            to={SANDBOX_ROUTES_SONS.STYLES}
+            label="bable"
+            to={SANDBOX_ROUTES_SONS.INTRODUCTION_BABLE}
             color="black"
           />
         </Toolbar>
@@ -27,4 +21,4 @@ const ComponentMenu = () => {
   );
 };
 
-export default ComponentMenu;
+export default IntroductionMenuPage;
