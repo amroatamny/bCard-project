@@ -44,6 +44,21 @@ const SandboxMenu = () => {
             to={SANDBOX_ROUTES_FATHER.USE_STATE}
             color="black"
           />
+          <NavItem
+            label="lifeCycle Hooks"
+            to={SANDBOX_ROUTES_FATHER.LIFESYCLE}
+            color="black"
+          />
+          <NavItem
+            label="custom hooks"
+            to={SANDBOX_ROUTES_FATHER.CUSTOM}
+            color="black"
+          />
+          <NavItem
+            label="memoizaiton"
+            to={SANDBOX_ROUTES_FATHER.MEMOIZAITON}
+            color="black"
+          />
         </Toolbar>
       </AppBar>
       <Outlet />

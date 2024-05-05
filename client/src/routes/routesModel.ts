@@ -6,6 +6,7 @@ const ROUTES = {
   MY_CARDS: "/my-cards",
   FAV_CARDS: "/fav-cards",
   CARD_DETATLS: "/card-info",
+
   SANDBOX: "/sandbox",
   LOGIN: "/login",
 };
@@ -17,6 +18,9 @@ export const SANDBOX_ROUTES_FATHER = {
   NAVIGATION: "navigation",
   PROPS: "props",
   USE_STATE: "use_state",
+  LIFESYCLE: "lifesecily-hooks",
+  CUSTOM: "custom",
+  MEMOIZAITON: "memoizition",
 };
 export const SANDBOX_ROUTES_SONS = {
   TEMPLATE: "template",
@@ -35,6 +39,17 @@ export const SANDBOX_ROUTES_SONS = {
   USE_STATE_COMPLEX_OBJ: "complexObj",
   USE_STATE_WITH_FUNCTION: "function",
   USE_STATE_WITH_OBJ: "objects",
+  LIFESYCLE_INITIAL: "initial",
+  LIFESYCLE_USE_STATE: "use-state-life",
+  LIFESYCLE_LIFE_CYCLE: "life-cycle",
+  LIFESYCLE_MOUNT: "mount",
+  LIFESYCLE_UPDATE: "update",
+  LIFESYCLE_UN_MOUNT: "unMount",
+  LIFESYCLE_NO_DEPENDENCIES: "no-dependencies",
+  CUSTOM_COUNTER: "counter",
+  CUSTOM_NAME: "name",
+  USE_MEMO: "memo",
+  USE_CALLBACK: "call-back",
 };
 
 export default ROUTES;
