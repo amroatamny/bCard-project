@@ -21,6 +21,7 @@ export const SANDBOX_ROUTES_FATHER = {
   LIFESYCLE: "lifesecily-hooks",
   CUSTOM: "custom",
   MEMOIZAITON: "memoizition",
+  CONTEXT: "context",
 };
 export const SANDBOX_ROUTES_SONS = {
   TEMPLATE: "template",
@@ -50,6 +51,8 @@ export const SANDBOX_ROUTES_SONS = {
   CUSTOM_NAME: "name",
   USE_MEMO: "memo",
   USE_CALLBACK: "call-back",
+  CONTEXT_NAME: "con-name",
+  CONTEXT_SNACK: "con-snack",
 };
 
 export default ROUTES;

@@ -59,6 +59,11 @@ const SandboxMenu = () => {
             to={SANDBOX_ROUTES_FATHER.MEMOIZAITON}
             color="black"
           />
+          <NavItem
+            label="context"
+            to={SANDBOX_ROUTES_FATHER.CONTEXT}
+            color="black"
+          />
         </Toolbar>
       </AppBar>
       <Outlet />
