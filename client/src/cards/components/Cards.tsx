@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "./card/Card";
 import CardInterface from "../interface/CardInterface";
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 type Props = { cards: CardInterface[] };
 
@@ -13,7 +12,6 @@ const Cards: React.FC<Props> = ({ cards }) => {
     console.log(`you like card no.${_id}`);
   };
 
-  if (!cards.length) return <Typography>sorry dude</Typography>;
   return (
     <Grid container spacing={2} pb={2}>
       {cards.map((card: CardInterface) => (
