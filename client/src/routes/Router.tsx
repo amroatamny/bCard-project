@@ -55,6 +55,7 @@ import ContextMenu from "../sandbox/context/ContextMenu";
 import NameProvider from "../sandbox/context/NameProvider";
 import SnackExample from "../sandbox/context/SnackExample";
 import A from "../sandbox/context/components/A";
+import FormTest from "../sandbox/forms/FormTest";
 
 const Router = () => {
   return (
@@ -227,6 +228,7 @@ const Router = () => {
           />
           <Route path={SANDBOX_ROUTES_SONS.CONTEXT_NAME} element={<A />} />
         </Route>
+        <Route path={SANDBOX_ROUTES_FATHER.FORM_TEST} element={<FormTest />} />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>

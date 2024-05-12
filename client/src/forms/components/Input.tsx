@@ -3,10 +3,11 @@ import TextField from "@mui/material/TextField";
 import { makeFirstLetterCapital } from "../utils/algoMethods";
 import Grid from "@mui/material/Grid";
 
-type BreakPoints = "xs" | "sm" | "md" | "lg" | "xl";
-
+type BreakPointsKeyTypes = "xs" | "sm" | "md" | "lg" | "xl";
+type VariantType = "filled" | "outlined" | "standard";
+type BreakPointsValueTypes = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 type Props = {
-  variant?: "filled" | "outlined" | "standard";
+  variant?: VariantType;
   type?: string;
   name: string;
   data: Record<string, unknown>;
@@ -14,7 +15,7 @@ type Props = {
   required?: boolean;
   error?: string;
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  breakPoints?: Partial<Record<BreakPoints, number>>;
+  breakPoints?: Partial<Record<BreakPointsKeyTypes, BreakPointsValueTypes>>;
 };
 
 const Input: FC<Props> = ({
@@ -26,10 +27,10 @@ const Input: FC<Props> = ({
   required = true,
   error,
   onInputChange,
-  breakPoints = { xl: 12 },
+  breakPoints = { xs: 12 },
 }) => {
   return (
-    <Grid item xs={12} {...breakPoints}>
+    <Grid item {...breakPoints}>
       <TextField
         variant={variant}
         label={makeFirstLetterCapital(label)}
@@ -39,7 +40,7 @@ const Input: FC<Props> = ({
         value={data[name] ? data[name] : ""}
         required={required}
         helperText={error}
-        error={Boolean(error)}
+        error={!!error}
         onChange={onInputChange}
         fullWidth
         autoComplete="off"

@@ -22,6 +22,7 @@ export const SANDBOX_ROUTES_FATHER = {
   CUSTOM: "custom",
   MEMOIZAITON: "memoizition",
   CONTEXT: "context",
+  FORM_TEST: "form",
 };
 export const SANDBOX_ROUTES_SONS = {
   TEMPLATE: "template",

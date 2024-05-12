@@ -5,6 +5,8 @@ import CardsFeedBack from "../components/CardsFeedBack";
 import useCards from "../hooks/useCards";
 const CardsPage = () => {
   const { cards, error, isLoading, handleGetCards } = useCards();
+  // console.log(cards);
+  // console.log(11);
 
   useEffect(() => {
     handleGetCards();

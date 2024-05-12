@@ -35,7 +35,8 @@ const FormButton: FC<Props> = ({
       color={color}
       onClick={onClick}
       disabled={disabled}
-      fullWidth>
+      fullWidth
+    >
       {node}
     </Button>
   );

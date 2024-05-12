@@ -46,7 +46,8 @@ const Form: FC<Props> = ({
       sx={{ mt: 2, p: { xs: 1, sm: 2 }, ...styles }}
       onSubmit={onSubmit}
       autoComplete="off"
-      noValidate>
+      noValidate
+    >
       <Typography align="center" variant="h5" component="h1" mb={2}>
         {title.toUpperCase()}
       </Typography>
@@ -56,7 +57,7 @@ const Form: FC<Props> = ({
       </Grid>
 
       <Grid container spacing={1} my={2} direction="row" width="100">
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={9}>
           <FormButton
             node="cancel"
             color="error"
@@ -65,7 +66,7 @@ const Form: FC<Props> = ({
             onClick={() => navigate(to)}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={3}>
           <FormButton
             node={<LoopIcon />}
             variant="outlined"
