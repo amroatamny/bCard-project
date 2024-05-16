@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "./routes/Router";
 import ThemeProvider from "./provider/ThemeProvider";
 import { SnackbarProvider } from "./provider/SnackbarProvider";
+import UserProvider from "./users/providers/UserProvider";
 
 function App() {
   return (
@@ -13,9 +14,11 @@ function App() {
       <BrowserRouter>
         <ThemeProvider>
           <SnackbarProvider>
-            <Layout>
-              <Router />
-            </Layout>
+            <UserProvider>
+              <Layout>
+                <Router />
+              </Layout>
+            </UserProvider>
           </SnackbarProvider>
         </ThemeProvider>
       </BrowserRouter>

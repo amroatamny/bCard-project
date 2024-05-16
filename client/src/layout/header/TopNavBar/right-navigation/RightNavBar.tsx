@@ -8,11 +8,12 @@ import MoreButton from "./MoreButton";
 import Logged from "./Logged";
 import NotLogged from "./NotLogged";
 import ThemeProvider, { useTheme } from "../../../../provider/ThemeProvider";
+import { useUser } from "../../../../users/providers/UserProvider";
 
 const RightNavBar = () => {
   const { isDark, toggleDarkMpode } = useTheme();
-  // const user = true
-  const user = false;
+
+  const { user } = useUser();
 
   return (
     <>

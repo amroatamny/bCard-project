@@ -1,43 +1,42 @@
 import React from "react";
 import Container from "@mui/material/Container";
-import PageHeader from "../../components/PageHeader";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
-import Joi from "joi";
 import useForm from "../../forms/hooks/useForm";
 import Form from "../../forms/components/Form";
-
 import Input from "../../forms/components/Input";
-import { Button } from "@mui/material";
 
+import FormLink from "../../forms/components/FormLink";
+import initialLoginForm from "../helpers/initialForms/initialLoginForm";
+import loginSchema from "../models/Joi/loginSchema";
+import useHandleUser from "../hooks/useHandleUser";
+// import handleLogin
 type Data = {
   email: string;
   password: string;
 };
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  // const user = false;
 
-  const initialLoginForm = {
-    email: "",
-    password: "",
-  };
-  const loginSchema = {
-    email: Joi.string().min(3).required(),
-    password: Joi.string().min(8).required(),
-  };
-  const handleLogin = (data: Data) => {
-    console.log(data);
-    handleReset();
-  };
+  // const handleLogin = (data: Data) => {
+  //   console.log(data);
+  //   handleReset();
+  // };
+  const {
+    handleLogin,
+    value: { user },
+  } = useHandleUser();
   const { value, ...rest } = useForm(
     initialLoginForm,
     loginSchema,
     handleLogin
   );
-  const { onSubmit, handleChange, handleReset, validateForm } = rest;
-  const { data, errors } = value;
 
+  const { onSubmit, handleChange, handleReset, validateForm } = rest;
+
+  const { data, errors } = value;
+  if (user) return <Navigate replace to={ROUTES.ROOT} />;
   return (
     <Container
       sx={{
@@ -53,8 +52,11 @@ const LoginPage = () => {
         onSubmit={onSubmit}
         onFormChange={validateForm}
         onReset={handleReset}
+        spacing={1}
+        styles={{ maxWidth: "450px" }}
       >
         <Input
+          type="email"
           name="email"
           data={data}
           label="email"
@@ -63,6 +65,7 @@ const LoginPage = () => {
           breakPoints={{ xs: 12, md: 6 }}
         />
         <Input
+          type="password"
           name="password"
           data={data}
           label="password"
@@ -70,9 +73,7 @@ const LoginPage = () => {
           error={errors.password}
           breakPoints={{ xs: 12, md: 6 }}
         />
-        <Button variant="text" onClick={() => navigate(ROUTES.SINGUP)}>
-          regester...
-        </Button>
+        <FormLink text="Did not registered yet ?" to={ROUTES.ROOT} />
       </Form>
     </Container>
   );

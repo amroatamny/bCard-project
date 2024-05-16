@@ -5,6 +5,9 @@ import Box from "@mui/material/Box";
 // import { useUser } from "../../../../users/providers/UserProvider";
 // import useUsers from "../../../../users/hooks/useUsers";
 import MenuLink from "./MenuLink";
+import ROUTES from "../../../../routes/routesModel";
+import { useUser } from "../../../../users/providers/UserProvider";
+import useHandleUser from "../../../../users/hooks/useHandleUser";
 
 type Props = {
   isOpen: boolean;
@@ -13,15 +16,15 @@ type Props = {
 };
 
 const Menu: React.FC<Props> = ({ isOpen, anchorEl, onClose }) => {
-  const user = true;
+  // const user = true;
   // const user = false
 
-  // const { user } = useUser();
-  // const { handleLogout } = useUsers();
+  const { user } = useUser();
+  const { handleLogout } = useHandleUser();
 
   const onLogout = () => {
-    //   handleLogout();
-    //   onClose();
+    handleLogout();
+    onClose();
   };
 
   return (
@@ -37,7 +40,8 @@ const Menu: React.FC<Props> = ({ isOpen, anchorEl, onClose }) => {
       transformOrigin={{
         vertical: "top",
         horizontal: "right",
-      }}>
+      }}
+    >
       <Box>
         <MenuLink
           label="about"
@@ -64,8 +68,16 @@ const Menu: React.FC<Props> = ({ isOpen, anchorEl, onClose }) => {
         )}
         {user && (
           <>
-            <MenuLink label="profile" navigateTo={""} onClick={onClose} />
-            <MenuLink label="edit account" navigateTo={""} onClick={onClose} />
+            <MenuLink
+              label="profile"
+              navigateTo={ROUTES.ROOT}
+              onClick={onClose}
+            />
+            <MenuLink
+              label="edit account"
+              navigateTo={ROUTES.ROOT}
+              onClick={onClose}
+            />
 
             <MenuItem onClick={onLogout}>Logout</MenuItem>
           </>

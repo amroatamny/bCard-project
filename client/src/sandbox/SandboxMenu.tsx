@@ -1,13 +1,15 @@
 import { AppBar, Box, Drawer, IconButton, List, Toolbar } from "@mui/material";
 import React, { useState } from "react";
 import NavItem from "../layout/components/NavItem";
-import { SANDBOX_ROUTES_FATHER } from "../routes/routesModel";
-import { Outlet } from "react-router-dom";
+import ROUTES, { SANDBOX_ROUTES_FATHER } from "../routes/routesModel";
+import { Navigate, Outlet } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DrawerListItem from "./DrawerListItem";
+import { useUser } from "../users/providers/UserProvider";
 const SandboxMenu = () => {
   const [isOpen, setOpen] = useState(false);
-  const max = "100";
+  const { user } = useUser();
+  if (!user || user.isAdmin) return <Navigate replace to={ROUTES.ROOT} />;
   return (
     <>
       <AppBar position="sticky" color="transparent">
