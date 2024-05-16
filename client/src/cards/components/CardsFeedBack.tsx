@@ -9,9 +9,17 @@ type Props = {
   isLoading: boolean;
   error: string | null;
   cards: CardInterface[] | null;
+  onDelete?: (id: string) => void;
+  onLike?: () => void;
 };
 
-const CardsFeedBack: React.FC<Props> = ({ isLoading, error, cards }) => {
+const CardsFeedBack: React.FC<Props> = ({
+  isLoading,
+  error,
+  cards,
+  onDelete = (cardId) => console.log("you deleted card: " + cardId),
+  onLike = () => {},
+}) => {
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
   if (cards && cards.length) return <Cards cards={cards} />;

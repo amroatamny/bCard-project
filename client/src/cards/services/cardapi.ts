@@ -1,5 +1,6 @@
 import axios from "axios";
 import CardInterface from "../interface/CardInterface";
+import { CardFromClientType } from "../models/types/cardTypes";
 
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8181";
 export const getCards = async () => {
@@ -26,7 +27,9 @@ export const getCard = async (cardId: string) => {
 };
 export const getMyCard = async () => {
   try {
-    const { data } = await axios.get<CardInterface>(`${apiUrl}/cards/my-cards`);
+    const { data } = await axios.get<CardInterface[]>(
+      `${apiUrl}/cards/my-cards`
+    );
     return Promise.resolve(data);
   } catch (error) {
     if (axios.isAxiosError(error)) return Promise.reject(error.message);
@@ -34,7 +37,7 @@ export const getMyCard = async () => {
     return Promise.reject("An unexpected error occurred!");
   }
 };
-export const createCard = async (card: CardInterface) => {
+export const createCard = async (card: object) => {
   try {
     const { data } = await axios.post(`${apiUrl}/cards/`, card);
     return Promise.resolve(data);

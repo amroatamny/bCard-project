@@ -56,11 +56,14 @@ import NameProvider from "../sandbox/context/NameProvider";
 import SnackExample from "../sandbox/context/SnackExample";
 import A from "../sandbox/context/components/A";
 import FormTest from "../sandbox/forms/FormTest";
+import CreateCard from "../cards/pages/CreateCard";
+import CreateCardPage from "../cards/pages/CreateCard";
 
 const Router = () => {
   return (
     <Routes>
       <Route path={ROUTES.ROOT} element={<CardsPage />} />
+      <Route path={ROUTES.CREATE_CARD} element={<CreateCardPage />} />
       <Route path={ROUTES.CARDS} element={<CardsPage />} />
       <Route
         path={`${ROUTES.CARD_DETATLS}/:cardId`}

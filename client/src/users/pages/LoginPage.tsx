@@ -11,10 +11,6 @@ import initialLoginForm from "../helpers/initialForms/initialLoginForm";
 import loginSchema from "../models/Joi/loginSchema";
 import useHandleUser from "../hooks/useHandleUser";
 // import handleLogin
-type Data = {
-  email: string;
-  password: string;
-};
 
 const LoginPage = () => {
   // const user = false;

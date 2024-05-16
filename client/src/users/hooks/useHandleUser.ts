@@ -1,8 +1,12 @@
 import { useCallback, useMemo, useState } from "react";
-import { LoginType, TokenType } from "../models/types/userTypes";
+import {
+  LoginType,
+  RegistrationForm,
+  TokenType,
+} from "../models/types/userTypes";
 import { useUser } from "../providers/UserProvider";
 import useAxiosinterceptors from "../../hooks/useAxiosinterceptors";
-import { login } from "../services/userApi";
+import { login, signup } from "../services/userApi";
 import {
   getUser,
   removeToken,
@@ -10,6 +14,8 @@ import {
 } from "../services/localStorage";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
+import signupInterface from "../interface/SignupInterface";
+import normalizeUser from "../helpers/normalization/normalizeUser";
 
 type errorType = null | string;
 
@@ -51,11 +57,27 @@ const useHandleUser = () => {
     setUser(null);
   }, []);
 
+  const handleSignup = useCallback(
+    async (user: RegistrationForm) => {
+      try {
+        const normalizedUser = normalizeUser(user);
+        await signup(normalizedUser);
+        await handleLogin({
+          email: user.email,
+          password: user.password,
+        });
+      } catch (error) {
+        if (typeof error === "string") requestStatus(false, error, null);
+      }
+    },
+    [requestStatus, handleLogin]
+  );
+
   const value = useMemo(() => {
     return { isLoading, error, user };
   }, []);
 
-  return { value, handleLogin, handleLogout };
+  return { value, handleLogin, handleLogout, handleSignup };
 };
 
 export default useHandleUser;

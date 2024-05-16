@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import CardInterface from "../interface/CardInterface";
 import {
   changeLikeStatus,
@@ -10,6 +10,11 @@ import {
   getMyCard,
 } from "../services/cardapi";
 import useAxiosinterceptors from "../../hooks/useAxiosinterceptors";
+import { useSnack } from "../../provider/SnackbarProvider";
+import { CardFromClientType } from "../models/types/cardTypes";
+import normalizeCard from "../helpers/normalizations/normalizeCard";
+import { Navigate, useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/routesModel";
 
 type errorType = null | string;
 type cardsType = CardInterface[] | null;
@@ -20,6 +25,8 @@ const useCards = () => {
   const [error, setError] = useState<errorType>(null);
   const [cards, setCards] = useState<cardsType>(null);
   const [card, setCard] = useState<cardType>(null);
+  const Navigate = useNavigate();
+  const snack = useSnack();
 
   useAxiosinterceptors();
 
@@ -27,7 +34,7 @@ const useCards = () => {
     loading: boolean,
     errorMessage: errorType,
     cards: cardsType,
-    card: cardType
+    card: cardType = null
   ) => {
     setLoading(loading);
     setError(errorMessage);
@@ -58,22 +65,28 @@ const useCards = () => {
   const handleGetMyCards = async () => {
     try {
       setLoading(true);
-      const card = await getMyCard();
-      requestStatus(false, null, cards, card);
+      const cards = await getMyCard();
+      requestStatus(false, null, cards);
     } catch (error) {
-      if (typeof error === "string") requestStatus(false, error, null, null);
+      if (typeof error === "string") requestStatus(false, error, null);
     }
   };
 
-  const HandleCreateCard = async (cardFromClient: CardInterface) => {
-    try {
-      setLoading(true);
-      const card = await createCard(cardFromClient);
-      requestStatus(false, null, null, card);
-    } catch (error) {
-      if (typeof error === "string") requestStatus(false, error, null, null);
-    }
-  };
+  const HandleCreateCard = useCallback(
+    async (cardFromClient: CardFromClientType) => {
+      try {
+        setLoading(true);
+        const normalizedCard = normalizeCard(cardFromClient);
+        const card = await createCard(normalizedCard);
+        requestStatus(false, null, null, card);
+        snack("success", "A new business card has been created");
+        Navigate(ROUTES.MY_CARDS);
+      } catch (error) {
+        if (typeof error === "string") return requestStatus(false, error, null);
+      }
+    },
+    []
+  );
 
   const handleUpdateCard = async (cardFromClient: CardInterface) => {
     try {

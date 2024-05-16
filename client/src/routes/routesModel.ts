@@ -6,9 +6,9 @@ const ROUTES = {
   MY_CARDS: "/my-cards",
   FAV_CARDS: "/fav-cards",
   CARD_DETATLS: "/card-info",
-
   SANDBOX: "/sandbox",
   LOGIN: "/login",
+  CREATE_CARD: "/create-card",
 };
 export const SANDBOX_ROUTES_FATHER = {
   COMPONENT: "component",
