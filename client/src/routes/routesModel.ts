@@ -3,12 +3,14 @@ const ROUTES = {
   ABOUT: "/about",
   CARDS: "/cards",
   SINGUP: "/singup",
-  MY_CARDS: "/my-cards",
+  MY_CARDS: "/my-cards-page",
   FAV_CARDS: "/fav-cards",
   CARD_DETATLS: "/card-info",
   SANDBOX: "/sandbox",
   LOGIN: "/login",
   CREATE_CARD: "/create-card",
+  EDIT_CARD: "/edit-card",
+  EDIT_ACCOUNT: "/edit-account",
 };
 export const SANDBOX_ROUTES_FATHER = {
   COMPONENT: "component",

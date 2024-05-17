@@ -3,28 +3,33 @@ import CardInterface from "../interface/CardInterface";
 import {
   changeLikeStatus,
   createCard,
-  deleteBusinessCard,
+  deleteCard,
   editCard,
   getCard,
   getCards,
-  getMyCard,
+  getMyCards,
 } from "../services/cardapi";
 import useAxiosinterceptors from "../../hooks/useAxiosinterceptors";
 import { useSnack } from "../../provider/SnackbarProvider";
-import { CardFromClientType } from "../models/types/cardTypes";
+import {
+  CardFromClientType,
+  CardMapToModelType,
+} from "../models/types/cardTypes";
 import normalizeCard from "../helpers/normalizations/normalizeCard";
 import { Navigate, useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
+import normalizeEditCard from "../helpers/normalizations/normalizeEditCard";
 
-type errorType = null | string;
-type cardsType = CardInterface[] | null;
-type cardType = CardInterface | null;
+type CardsType = null | CardInterface[];
+type CardType = null | CardInterface;
+type ErrorType = null | string;
 
 const useCards = () => {
   const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState<errorType>(null);
-  const [cards, setCards] = useState<cardsType>(null);
-  const [card, setCard] = useState<cardType>(null);
+  const [error, setError] = useState<null | string>(null);
+  const [cards, setCards] = useState<CardsType>(null);
+  const [card, setCard] = useState<CardType>(null);
+
   const Navigate = useNavigate();
   const snack = useSnack();
 
@@ -32,9 +37,9 @@ const useCards = () => {
 
   const requestStatus = (
     loading: boolean,
-    errorMessage: errorType,
-    cards: cardsType,
-    card: cardType = null
+    errorMessage: ErrorType,
+    cards: CardsType,
+    card: CardType = null
   ) => {
     setLoading(loading);
     setError(errorMessage);
@@ -57,20 +62,21 @@ const useCards = () => {
       setLoading(true);
       const card = await getCard(cardId);
       requestStatus(false, null, null, card);
+      return card;
     } catch (error) {
       if (typeof error === "string") requestStatus(false, error, null, null);
     }
   };
 
-  const handleGetMyCards = async () => {
+  const handleGetMyCards = useCallback(async () => {
     try {
       setLoading(true);
-      const cards = await getMyCard();
+      const cards = await getMyCards();
       requestStatus(false, null, cards);
     } catch (error) {
-      if (typeof error === "string") requestStatus(false, error, null);
+      if (typeof error === "string") return requestStatus(false, error, null);
     }
-  };
+  }, []);
 
   const HandleCreateCard = useCallback(
     async (cardFromClient: CardFromClientType) => {
@@ -88,25 +94,31 @@ const useCards = () => {
     []
   );
 
-  const handleUpdateCard = async (cardFromClient: CardInterface) => {
-    try {
-      setLoading(true);
-      const card = await editCard(cardFromClient);
-      requestStatus(false, null, null, card);
-    } catch (error) {
-      if (typeof error === "string") requestStatus(false, error, null, null);
-    }
-  };
+  const handleUpdateCard = useCallback(
+    async (cardFromClient: CardMapToModelType) => {
+      try {
+        setLoading(true);
+        const normalizedCard = normalizeEditCard(cardFromClient);
+        const cardFomServer = await editCard(normalizedCard);
+        requestStatus(false, null, null, cardFomServer);
+        snack("success", "The business card has been successfully updated");
+        Navigate(ROUTES.MY_CARDS);
+      } catch (error) {
+        if (typeof error === "string") return requestStatus(false, error, null);
+      }
+    },
+    []
+  );
 
-  const handleDeleteCard = async (cardId: string) => {
+  const handleDeleteCard = useCallback(async (cardId: string) => {
     try {
       setLoading(true);
-      const card = await deleteBusinessCard(cardId);
-      requestStatus(false, null, null, card);
+      await deleteCard(cardId);
+      snack("success", "The business card has been successfully deleted");
     } catch (error) {
-      if (typeof error === "string") requestStatus(false, error, null, null);
+      if (typeof error === "string") return requestStatus(false, error, null);
     }
-  };
+  }, []);
 
   const handleLikeCard = async (cardId: string) => {
     try {

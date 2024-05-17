@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "@mui/material/Container";
-import PageHeader from "../components/PageHeader";
+import PageHeader from "../../components/PageHeader";
 
 const FavCardsPage = () => {
   return (

@@ -9,8 +9,7 @@ import AboutPage from "../pages/AboutPage";
 import ErrorPage from "../pages/ErrorPage";
 import LoginPage from "../users/pages/LoginPage";
 import SingupPage from "../users/pages/SingupPage";
-import MyCards from "../pages/MyCardsPage";
-import FavCardsPage from "../pages/FavCardsPage";
+import FavCardsPage from "../cards/pages/FavCardsPage";
 
 import CardDetailsPage from "../cards/pages/CardDetailsPage";
 import SandboxMenu from "../sandbox/SandboxMenu";
@@ -58,6 +57,9 @@ import A from "../sandbox/context/components/A";
 import FormTest from "../sandbox/forms/FormTest";
 import CreateCard from "../cards/pages/CreateCard";
 import CreateCardPage from "../cards/pages/CreateCard";
+import MyCardsPage from "../cards/pages/MyCardsPage";
+import EditCardPage from "../cards/pages/EditCardPage";
+import EditUserPage from "../users/pages/EditUserPage";
 
 const Router = () => {
   return (
@@ -69,10 +71,15 @@ const Router = () => {
         path={`${ROUTES.CARD_DETATLS}/:cardId`}
         element={<CardDetailsPage />}
       />
+      <Route path={`${ROUTES.EDIT_CARD}/:cardId`} element={<EditCardPage />} />
+      <Route
+        path={`${ROUTES.EDIT_ACCOUNT}/:userId`}
+        element={<EditUserPage />}
+      />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path={ROUTES.SINGUP} element={<SingupPage />} />
-      <Route path={ROUTES.MY_CARDS} element={<MyCards />} />
+      <Route path={ROUTES.MY_CARDS} element={<MyCardsPage />} />
       <Route path={ROUTES.FAV_CARDS} element={<FavCardsPage />} />
 
       <Route path={ROUTES.SANDBOX} element={<SandboxMenu />}>

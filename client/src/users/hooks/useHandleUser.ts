@@ -1,8 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
 import {
-  LoginType,
+  Login,
   RegistrationForm,
   TokenType,
+  UserMapToModelType,
+  UserRegistered,
 } from "../models/types/userTypes";
 import { useUser } from "../providers/UserProvider";
 import useAxiosinterceptors from "../../hooks/useAxiosinterceptors";
@@ -14,8 +16,9 @@ import {
 } from "../services/localStorage";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
-import signupInterface from "../interface/SignupInterface";
+// import signupInterface from "../interface/SignupInterface";
 import normalizeUser from "../helpers/normalization/normalizeUser";
+import { useSnack } from "../../provider/SnackbarProvider";
 
 type errorType = null | string;
 
@@ -23,7 +26,7 @@ const useHandleUser = () => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<errorType>(null);
   const { setUser, setToken, user } = useUser();
-
+  const snack = useSnack();
   useAxiosinterceptors();
   const navigate = useNavigate();
   const requestStatus = (
@@ -37,7 +40,7 @@ const useHandleUser = () => {
   };
 
   const handleLogin = useCallback(
-    async (user: LoginType) => {
+    async (user: Login) => {
       try {
         setLoading(true);
         const token = await login(user);
@@ -66,12 +69,21 @@ const useHandleUser = () => {
           email: user.email,
           password: user.password,
         });
+        snack("success", "You have successfully registered and logged in.");
       } catch (error) {
         if (typeof error === "string") requestStatus(false, error, null);
       }
     },
     [requestStatus, handleLogin]
   );
+
+  const handleUpdateUser = async (userFromClient: UserMapToModelType) => {
+    try {
+      setLoading(true);
+      const newnormalizeUser = normalizeUser(userFromClient);
+      const userFromServer = await UpdateUser(newnormalizeUser);
+    } catch (error) {}
+  };
 
   const value = useMemo(() => {
     return { isLoading, error, user };

@@ -11,7 +11,7 @@ import ROUTES from "../../../routes/routesModel";
 type Props = {
   card: CardInterface;
   onDelete: (id: string) => void;
-  onLike: (id: string) => void;
+  onLike: () => void;
 };
 const Card: React.FC<Props> = ({ card, onDelete, onLike }) => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Card: React.FC<Props> = ({ card, onDelete, onLike }) => {
         <CardHead image={card.image} />
         <CardBody card={card} />
       </CardActionArea>
-      <CardActionBar cardId={card._id} onLike={onLike} onDelete={onDelete} />{" "}
+      <CardActionBar card={card} onLike={onLike} onDelete={onDelete} />{" "}
     </MuiCard>
   );
 };
