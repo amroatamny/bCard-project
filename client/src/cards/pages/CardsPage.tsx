@@ -3,12 +3,12 @@ import PageHeader from "../../components/PageHeader";
 import { Container } from "@mui/material";
 import CardsFeedBack from "../components/CardsFeedBack";
 import useCards from "../hooks/useCards";
+import useHandleUser from "../../users/hooks/useHandleUser";
+import { useUser } from "../../users/providers/UserProvider";
 
 const CardsPage = () => {
   const { cards, error, isLoading, handleGetCards, handleDeleteCard } =
     useCards();
-  // console.log(cards);
-  // console.log(11);
 
   useEffect(() => {
     handleGetCards();

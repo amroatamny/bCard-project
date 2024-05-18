@@ -12,6 +12,7 @@ import {
   RegistrationForm,
   RegistrationFormErrors,
 } from "../models/types/userTypes";
+import { useUser } from "../providers/UserProvider";
 
 type Props = {
   title?: string;
@@ -33,6 +34,7 @@ const UserForm: FC<Props> = ({
   onInputChange,
   setData,
 }) => {
+  const { user } = useUser();
   return (
     <Form
       onSubmit={onSubmit}
@@ -177,7 +179,7 @@ const UserForm: FC<Props> = ({
           label="Signup as business"
         />
       </Grid>
-      <FormLink text="Already registered?" to={ROUTES.LOGIN} />
+      {!user && <FormLink text="Already registered?" to={ROUTES.LOGIN} />}
     </Form>
   );
 };

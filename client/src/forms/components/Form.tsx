@@ -78,7 +78,7 @@ const Form: FC<Props> = ({
           <FormButton
             node="Submit"
             onClick={onSubmit}
-            disabled={!!onFormChange()}
+            // disabled={!!onFormChange()}
             size="large"
           />
         </Grid>

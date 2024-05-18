@@ -8,7 +8,12 @@ import {
 } from "../models/types/userTypes";
 import { useUser } from "../providers/UserProvider";
 import useAxiosinterceptors from "../../hooks/useAxiosinterceptors";
-import { login, signup } from "../services/userApi";
+import {
+  editUser,
+  getUserFromServer,
+  login,
+  signup,
+} from "../services/userApi";
 import {
   getUser,
   removeToken,
@@ -16,15 +21,18 @@ import {
 } from "../services/localStorage";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
-// import signupInterface from "../interface/SignupInterface";
+
 import normalizeUser from "../helpers/normalization/normalizeUser";
 import { useSnack } from "../../provider/SnackbarProvider";
+import normalizeEditUser from "../helpers/normalization/normalizeEditUser";
+import signupInterface from "../interface/SignupInterface";
 
 type errorType = null | string;
-
+type userType = null | UserRegistered;
 const useHandleUser = () => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<errorType>(null);
+
   const { setUser, setToken, user } = useUser();
   const snack = useSnack();
   useAxiosinterceptors();
@@ -77,19 +85,42 @@ const useHandleUser = () => {
     [requestStatus, handleLogin]
   );
 
+  const handleGetUser = async (cardId: string) => {
+    try {
+      setLoading(true);
+      const user = await getUserFromServer(cardId);
+      requestStatus(false, null, user);
+      return user;
+    } catch (error) {
+      if (typeof error === "string") requestStatus(false, error, null);
+    }
+  };
+
   const handleUpdateUser = async (userFromClient: UserMapToModelType) => {
     try {
       setLoading(true);
-      const newnormalizeUser = normalizeUser(userFromClient);
-      const userFromServer = await UpdateUser(newnormalizeUser);
-    } catch (error) {}
+      const newnormalizeUser = normalizeEditUser(userFromClient);
+      const userFromServer = await editUser(newnormalizeUser);
+      requestStatus(false, null, userFromServer);
+      snack("success", "The business card has been successfully updated");
+      navigate(ROUTES.ROOT);
+    } catch (error) {
+      if (typeof error === "string") return requestStatus(false, error, null);
+    }
   };
 
   const value = useMemo(() => {
     return { isLoading, error, user };
   }, []);
 
-  return { value, handleLogin, handleLogout, handleSignup };
+  return {
+    value,
+    handleLogin,
+    handleLogout,
+    handleSignup,
+    handleUpdateUser,
+    handleGetUser,
+  };
 };
 
 export default useHandleUser;

@@ -43,16 +43,16 @@ export type RegistrationForm = {
 };
 
 export type UserMapToModelType = {
-  _id?: string;
+  _id: string;
   first: string;
-  middle?: string;
+  middle: string;
   last: string;
   phone: string;
   email: string;
   password: string;
   url: string;
   alt: string;
-  state?: string;
+  state: string;
   country: string;
   city: string;
   street: string;

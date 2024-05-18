@@ -21,7 +21,6 @@ const MyCardsPage = () => {
   }, []);
 
   const onDeleteCard = async (cardId: string) => {
-    console.log(cardId);
     await handleDeleteCard(cardId);
     await handleGetMyCards();
   };

@@ -20,9 +20,6 @@ const CardActionBar = ({ onDelete, onLike, card }: Props) => {
   const { user_id, _id, likes } = card;
   const { user } = useUser();
   const navigate = useNavigate();
-  const handleCardEdit = () => {
-    console.log(`you move to card edit no.${_id}`);
-  };
 
   const handleDialog = (term?: string) => {
     if (term === "open") return setDialog(true);
@@ -40,7 +37,7 @@ const CardActionBar = ({ onDelete, onLike, card }: Props) => {
         sx={{ pt: 0, justifyContent: "space-between" }}
       >
         <Box>
-          {user && (user.isAdmin || user._id === user_id) && (
+          {user && user._id === user_id && (
             <IconButton
               onClick={() => handleDialog("open")}
               aria-label="delete"

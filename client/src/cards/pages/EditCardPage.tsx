@@ -26,7 +26,7 @@ const EditCardPage = () => {
 
   useEffect(() => {
     if (cardId)
-      handleGetCard(cardId).then((data: data) => {
+      handleGetCard(cardId).then((data) => {
         if (user?._id !== data!.user_id) return navigate(ROUTES.ROOT);
         const modeledCard = mapCardToModel(data!);
         setData(modeledCard);
