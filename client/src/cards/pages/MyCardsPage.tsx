@@ -11,8 +11,14 @@ import AddIcon from "@mui/icons-material/Add";
 
 const MyCardsPage = () => {
   const { user } = useUser();
-  const { handleGetMyCards, handleDeleteCard, isLoading, cards, error } =
-    useCards();
+  const {
+    handleGetMyCards,
+    handleDeleteCard,
+    isLoading,
+    cards,
+    error,
+    filterCard,
+  } = useCards();
 
   const navigate = useNavigate();
 
@@ -51,7 +57,7 @@ const MyCardsPage = () => {
       <CardsFeedBack
         isLoading={isLoading}
         error={error}
-        cards={cards}
+        cards={filterCard}
         onDelete={onDeleteCard}
       />
     </Container>

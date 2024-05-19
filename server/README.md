@@ -18,7 +18,7 @@ npm i
 
 you can run:
 
-### `npm start`X
+### `npm start`
 
 - It will run the app with node
 - The page will not reload if you make edits.

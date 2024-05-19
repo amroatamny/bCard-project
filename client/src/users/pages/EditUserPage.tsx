@@ -20,7 +20,8 @@ import ROUTES from "../../routes/routesModel";
 import { Container } from "@mui/material";
 
 import useHandleUser from "../hooks/useHandleUser";
-import signupSchema from "../models/Joi/signupSchema";
+import userEditSchema from "../models/Joi/userEditSchema";
+
 import initialSignupForm from "../helpers/initialForms/initialSignupForm";
 import mapUserToModel from "../helpers/normalization/mapUserToModel";
 import UserForm from "../components/UserForm";
@@ -34,7 +35,7 @@ const EditUserPage = () => {
 
   const { value, ...rest } = useForm(
     initialSignupForm,
-    signupSchema,
+    userEditSchema,
     handleUpdateUser
   );
 

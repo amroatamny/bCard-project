@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CardInterface from "../interface/CardInterface";
 import {
   changeLikeStatus,
@@ -16,9 +16,10 @@ import {
   CardMapToModelType,
 } from "../models/types/cardTypes";
 import normalizeCard from "../helpers/normalizations/normalizeCard";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
 import normalizeEditCard from "../helpers/normalizations/normalizeEditCard";
+import { useUser } from "../../users/providers/UserProvider";
 
 type CardsType = null | CardInterface[];
 type CardType = null | CardInterface;
@@ -29,12 +30,28 @@ const useCards = () => {
   const [error, setError] = useState<null | string>(null);
   const [cards, setCards] = useState<CardsType>(null);
   const [card, setCard] = useState<CardType>(null);
-
+  const [query, setQuery] = useState("");
+  const [filterCard, setFilter] = useState<any>(null);
+  const [SearchParams] = useSearchParams();
   const Navigate = useNavigate();
   const snack = useSnack();
-
+  const { user } = useUser();
   useAxiosinterceptors();
 
+  useEffect(() => {
+    setQuery(SearchParams.get("q") ?? "");
+  }, [SearchParams]);
+
+  useEffect(() => {
+    if (cards) {
+      setFilter(
+        cards.filter(
+          (card) =>
+            card.title.includes(query) || String(card.bizNumber).includes(query)
+        )
+      );
+    }
+  }, [cards, query]);
   const requestStatus = (
     loading: boolean,
     errorMessage: ErrorType,
@@ -124,18 +141,29 @@ const useCards = () => {
     try {
       setLoading(true);
       const card = await changeLikeStatus(cardId);
-      const cards = await getCards();
       requestStatus(false, null, cards, card);
     } catch (error) {
       if (typeof error === "string") requestStatus(false, error, null, null);
     }
   };
-
+  const handleGetFavCards = useCallback(async () => {
+    try {
+      setLoading(true);
+      const cards = await getCards();
+      const favCards = cards.filter(
+        (card) => !!card.likes.find((id) => id === user?._id)
+      );
+      requestStatus(false, null, favCards);
+    } catch (error) {
+      if (typeof error === "string") return requestStatus(false, error, null);
+    }
+  }, [user]);
   return {
     isLoading,
     error,
     cards,
     card,
+    filterCard,
     handleGetCards,
     handleDeleteCard,
     handleGetCard,
@@ -143,6 +171,7 @@ const useCards = () => {
     handleLikeCard,
     handleUpdateCard,
     HandleCreateCard,
+    handleGetFavCards,
   };
 };
 export default useCards;

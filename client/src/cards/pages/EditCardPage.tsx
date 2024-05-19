@@ -10,7 +10,7 @@ import mapCardToModel from "../helpers/normalizations/mapCardToModel";
 import { Container } from "@mui/material";
 import CreateCardForm from "../components/CreateCardForm";
 import { CardMapToModelType } from "../models/types/cardTypes";
-type data = any;
+
 const EditCardPage = () => {
   const { handleUpdateCard, handleGetCard, card } = useCards();
   const { user } = useUser();

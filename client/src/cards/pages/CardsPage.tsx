@@ -7,8 +7,14 @@ import useHandleUser from "../../users/hooks/useHandleUser";
 import { useUser } from "../../users/providers/UserProvider";
 
 const CardsPage = () => {
-  const { cards, error, isLoading, handleGetCards, handleDeleteCard } =
-    useCards();
+  const {
+    filterCard,
+
+    error,
+    isLoading,
+    handleGetCards,
+    handleDeleteCard,
+  } = useCards();
 
   useEffect(() => {
     handleGetCards();
@@ -28,7 +34,7 @@ const CardsPage = () => {
       <CardsFeedBack
         isLoading={isLoading}
         error={error}
-        cards={cards}
+        cards={filterCard}
         onDelete={onDeleteCard}
       />
     </Container>
