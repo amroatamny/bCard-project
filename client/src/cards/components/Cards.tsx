@@ -8,16 +8,12 @@ type Props = {
   onLike: () => void;
 };
 
-const Cards: React.FC<Props> = ({ cards, onDelete }) => {
-  const handleCardLike = () => {
-    console.log(`you like card no.`);
-  };
-
+const Cards: React.FC<Props> = ({ cards, onDelete, onLike }) => {
   return (
     <Grid container spacing={2} pb={2}>
       {cards.map((card: CardInterface) => (
         <Grid item key={card._id} xs={12} sm={6} md={4} lg={3}>
-          <Card card={card} onDelete={onDelete} onLike={handleCardLike} />
+          <Card card={card} onDelete={onDelete} onLike={onLike} />
         </Grid>
       ))}
     </Grid>
