@@ -16,7 +16,7 @@ type Props = {
   onLike: () => void;
   card: CardInterface;
 };
-const CardActionBar = ({ onDelete, card, onLike }: Props) => {
+const CardActionBar: React.FC<Props> = ({ onDelete, card, onLike }) => {
   const [isDialogOpen, setDialog] = useState(false);
 
   const { handleLikeCard } = useCards();
@@ -37,7 +37,7 @@ const CardActionBar = ({ onDelete, card, onLike }: Props) => {
   };
   const handleLike = async () => {
     setLike((prev) => !prev);
-    await handleLikeCard(card._id);
+    await handleLikeCard(_id);
     onLike();
   };
   return (

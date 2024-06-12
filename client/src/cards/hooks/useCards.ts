@@ -139,11 +139,11 @@ const useCards = () => {
 
   const handleLikeCard = async (cardId: string) => {
     try {
-      setLoading(true);
       const card = await changeLikeStatus(cardId);
       requestStatus(false, null, cards, card);
     } catch (error) {
-      if (typeof error === "string") requestStatus(false, error, null, null);
+      if (typeof error === "string")
+        return requestStatus(false, error, null, null);
     }
   };
   const handleGetFavCards = useCallback(async () => {

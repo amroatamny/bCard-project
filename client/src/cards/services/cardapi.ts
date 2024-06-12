@@ -66,13 +66,16 @@ export const editCard = async (normalizedCard: NormalizedEditCard) => {
 
 export const changeLikeStatus = async (cardId: string) => {
   try {
-    const { data } = await axios.patch(`${apiUrl}/cards/${cardId}`);
+    const { data } = await axios.patch<CardInterface>(
+      `${apiUrl}/cards/${cardId}`
+    );
     return Promise.resolve(data);
   } catch (error) {
     if (axios.isAxiosError(error)) return Promise.reject(error.message);
     return Promise.reject("An unexpected error occurred!");
   }
 };
+
 export const deleteCard = async (cardId: string) => {
   try {
     const { data } = await axios.delete(`${apiUrl}/cards/${cardId}`);

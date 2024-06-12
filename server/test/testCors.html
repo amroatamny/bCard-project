@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <pre id="output"></pre>
+    <script>
+      const OUTPUT = document.getElementById("output");
+
+      const resltMassages = (message) => {
+        console.log(message);
+        OUTPUT.innerHTML = message;
+      };
+
+      const getData = async () => {
+        try {
+          const data = await fetch("http://127.0.0.1:8181");
+          const { message } = await data.json();
+          return resltMassages(message);
+        } catch (error) {
+          resltMassages(error.message);
+        }
+      };
+      getData();
+    </script>
+  </body>
+</html>
