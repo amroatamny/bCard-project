@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const chalk = require("chalk");
 const morgan = require("morgan");
-const currentTime = require("../utils/timeService");
+const FS = require("fs");
+const { currentDateMorgan, currentTime } = require("../utils/timeService");
 
 const morganLogger = morgan((tokens, req, res) => {
   const morganString = [
@@ -15,7 +16,30 @@ const morganLogger = morgan((tokens, req, res) => {
     tokens["response-time"](req, res),
     "ms",
   ].join(" ");
-  if (tokens.status(req, res) >= 400) return chalk.redBright(morganString);
+  if (tokens.status(req, res) >= 400) {
+    const isFileExists = FS.existsSync(
+      `${__dirname}/logs/${currentDateMorgan()}.log`
+    );
+    if (!isFileExists) {
+      FS.writeFile(
+        `${__dirname}/logs/${currentDateMorgan()}.log`,
+        `ERROR : ${morganString}\n`,
+        (error) => {
+          if (error) return console.log(error.message);
+        }
+      );
+    } else {
+      FS.appendFile(
+        `${__dirname}/logs/${currentDateMorgan()}.log`,
+        `ERROR : ${morganString}\n`,
+        (error) => {
+          if (error) return console.log(error.message);
+        }
+      );
+    }
+
+    return chalk.redBright(morganString);
+  }
   return chalk.cyanBright(morganString);
 });
 

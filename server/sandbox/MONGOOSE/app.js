@@ -12,7 +12,7 @@ app.listen(PORT, () => {
   mongoose
     .connect("mongodb://127.0.0.1:27017/mongoose-sandbox")
     .then(() => console.log(chalk.magentaBright("connected to MongoDb!")))
-    .catch(error =>
+    .catch((error) =>
       console.log(
         chalk.redBright.bold(`could not connect to mongoDb: ${error}`)
       )
@@ -61,17 +61,17 @@ const handleError = (res, error) => {
 // });
 
 /***** Schema validate unique *****/
-// const schema = new mongoose.Schema({
-//   email: {
-//     type: String,
-//     required: true,
-//     unique: true,
-//   },
-//   password: {
-//     type: String,
-//     required: true,
-//   },
-// });
+const schemaU = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
 
 /***** Schema validate regex *****/
 // const schema = new mongoose.Schema({
