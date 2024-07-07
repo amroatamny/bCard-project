@@ -1,4 +1,5 @@
 const ENVIROMENT = process.env.ENVIROMENT || "dev";
+// const ENVIROMENT = "prod";
 
 const connectToDb = () => {
   if (ENVIROMENT == "dev") require("./mongodb/connectToMongoDBLocally");

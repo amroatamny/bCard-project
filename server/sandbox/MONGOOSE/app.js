@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const chalk = require("chalk");
 const mongoose = require("mongoose");
+// const { find } = require("lodash");
 const lodash = require("lodash");
 
 app.use(express.json());
@@ -61,17 +62,17 @@ const handleError = (res, error) => {
 // });
 
 /***** Schema validate unique *****/
-const schemaU = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+// const schemaU = new mongoose.Schema({
+//   email: {
+//     type: String,
+//     required: true,
+//     unique: true,
+//   },
+//   password: {
+//     type: String,
+//     required: true,
+//   },
+// });
 
 /***** Schema validate regex *****/
 // const schema = new mongoose.Schema({
@@ -244,16 +245,16 @@ app.delete("/findByIdAndDelete/:id", async (req, res) => {
 
 /***** unique number *****/
 
-// const generateUniqueNumber = async () => {
-//   try {
-//     const random = lodash.random(1, 3);
-//     const isExist = await Test.findOne({ age: random }, { age: 1, _id: 0 });
-//     if (isExist) return generateUniqueNumber();
-//     return Promise.resolve(random);
-//   } catch (error) {
-//     return Promise.reject(`Mongoose Error: ${error.message}`);
-//   }
-// };
+const generateUniqueNumber = async () => {
+  try {
+    const random = lodash.random(1, 3);
+    const isExist = await Test.findOne({ age: random }, { age: 1, _id: 0 });
+    if (isExist) return generateUniqueNumber();
+    return Promise.resolve(random);
+  } catch (error) {
+    return Promise.reject(`Mongoose Error: ${error.message}`);
+  }
+};
 
 // generateUniqueNumber()
 //   .then(data => console.log(data))
@@ -285,24 +286,24 @@ app.patch("/changeBizStatus/:id", async (req, res) => {
   }
 });
 
-// app.patch("/changeBizStatus/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
+app.patch("/changeBizStatus/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
 
-//     const isExist = await Test.findById(id);
-//     if (!isExist)
-//       throw new Error("No user with this id was found in the database!");
+    const isExist = await Test.findById(id);
+    if (!isExist)
+      throw new Error("No user with this id was found in the database!");
 
-//     const userFromDB = await Test.findByIdAndUpdate(
-//       id,
-//       { isBusiness: !isExist.isBusiness },
-//       { new: true }
-//     );
-//     return res.send(userFromDB);
-//   } catch (error) {
-//     return handleError(res, error);
-//   }
-// });
+    const userFromDB = await Test.findByIdAndUpdate(
+      id,
+      { isBusiness: !isExist.isBusiness },
+      { new: true }
+    );
+    return res.send(userFromDB);
+  } catch (error) {
+    return handleError(res, error);
+  }
+});
 
 app.use((err, req, res, next) => {
   console.error(chalk.redBright(err.message));
@@ -325,3 +326,87 @@ app.use((err, req, res, next) => {
 // });
 
 // console.log(mapped);
+
+// app.post("/", async (req, res) => {
+//   try {
+//     const dataFromCli = req.body;
+//     const newTest = new Test(dataFromCli);
+//     await newTest.save();
+//     return res.send(newTest);
+//   } catch (error) {
+//     console.log(chalk.redBright(`Mongoose Schema Error: ${error.message}`));
+//     res.status(400).send(error.message);
+//   }
+// });
+
+/////// exe ////////
+
+// app.get("/", async (req, res) => {
+//   try {
+//     const formDb = await Test.find();
+//     res.send(formDb);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// });
+// app.post("/", async (req, res) => {
+//   try {
+//     const dataFromReqBody = req.body;
+//     const user = new Test(dataFromReqBody);
+//     await user.save();
+//     return res.send(user);
+//   } catch (error) {
+//     console.log(chalk.redBright(`Mongoose Schema Error: ${error.message}`));
+//     res.status(400).send(error.message);
+//   }
+// });
+// app.get("/exe2", async (req, res) => {
+//   try {
+//     const getBigAge = await Test.find({ age: { $gte: 18 } }, { _id: 1 });
+//     res.send(getBigAge);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// });
+
+// app.get("/getFirstNameByFamily", async (req, res) => {
+//   try {
+//     const { last } = req.query;
+//     const isExist = await Test.findOne({ last }, { first: 1, _id: 0 });
+//     if (!isExist) throw new Error("cant find a name with this last name");
+//     res.send(isExist);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// });
+app.put("/update/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const newFirstName = req.body;
+    const update = await Test.findByIdAndUpdate(id, newFirstName, {
+      new: true,
+    });
+    if (!update) throw new Error("cant find this id ");
+    res.send(update);
+  } catch (error) {
+    handleError(res, error);
+  }
+});
+// app.delete("/delete/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const update = await Test.findByIdAndDelete(id);
+//     if (!update) throw new Error("cant find this id ");
+//     res.send(update);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// });
+// app.get("/getall", async (req, res) => {
+//   try {
+//     const all = await Test.find({}).sort({ last: 1 }).select(["last", "-_id"]);
+//     res.send(all);
+//   } catch (error) {
+//     handleError(res, error);
+//   }
+// });
