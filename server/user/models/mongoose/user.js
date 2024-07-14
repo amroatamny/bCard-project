@@ -20,9 +20,11 @@ const schema = new mongoose.Schema({
     /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/,
     true
   ),
-  password: regexType(
-    /((?=.*\d{1})(?=.*[A-Z]{1})(?=.*[a-z]{1})(?=.*[!@#$%^&*-]{1}).{7,20})/
-  ),
+  password: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   image: imageSchema,
   address: addressSchema,
   isAdmin: {

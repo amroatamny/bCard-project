@@ -92,6 +92,7 @@ const schema = new mongoose.Schema({
   age: Number,
   isBusiness: { type: Boolean, default: false },
   date: { type: Date, default: Date.now },
+  like: [String],
 });
 
 const Test = mongoose.model("test", schema);
@@ -410,3 +411,66 @@ app.put("/update/:id", async (req, res) => {
 //     handleError(res, error);
 //   }
 // });
+
+// const likeCard = async (req, res) => {
+//   try {
+//     const { cardId } = req.params;
+//     const userId = req.body.user_id;
+//     const pipline = (userid) => {
+//       const p = [{ likes: { $elemMatch: { $eq: userid } } }];
+
+//       console.log(p);
+//       console.log(!!p);
+//       const push = { $push: { likes: userid } };
+//       const pull = { $pull: { likes: userid } };
+//       if (p === userId) return push;
+//       return pull;
+//     };
+
+//     // const pipline = {
+//     //   $cond: {
+//     //     if: { likes: { $elemMatch: userId } },
+//     //     then: { $pull: { likes: userId } },
+//     //     else: { $push: { likes: userId } },
+//     //   },
+//     // };
+//     // console.log(pipline());
+
+//     // const pipline = { $push: { likes: userId } };
+//     // const piplinee = () => {
+//     //   const a = { $pull: { likes: userId } };
+//     //   console.log(a);
+//     //   return a;
+//     // };
+//     const configuration = { new: true };
+//     const CardFromDB = await Card.findByIdAndUpdate(
+//       cardId,
+//       pipline(userId),
+//       configuration
+//     );
+
+//     if (!CardFromDB)
+//       throw new Error(
+//         "Could not update this card because a card with this ID cannot be found in the database"
+//       );
+//     res.send(CardFromDB);
+//   } catch (error) {
+//     handleError(res, 404, error);
+//   }
+// };
+
+app.patch("/update/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.body.user_id;
+    const pipline = { $push: { like: userId } };
+    const configuration = { new: true };
+
+    const ma = [{ $match: { like: userId } }];
+    const CardFromDB = await Test.findByIdAndUpdate(id, pipline, configuration);
+    if (!CardFromDB) throw new Error("cant find this id ");
+    res.send(CardFromDB);
+  } catch (error) {
+    handleError(res, error);
+  }
+});

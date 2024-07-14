@@ -10,7 +10,6 @@ const address_validate = {
 const addressSchema = new mongoose.Schema({
   state: {
     type: String,
-
     maxLength: 256,
     trim: true,
     lowercase: true,

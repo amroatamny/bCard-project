@@ -1,11 +1,11 @@
 const Joi = require("joi");
 
-const validateUser = (user) => {
+const registerValidation = (user) => {
   const schema = Joi.object({
     name: Joi.object()
       .keys({
         first: Joi.string().min(2).max(256).required(),
-        middle: Joi.string().min(2).max(256).allow(""),
+        middle: Joi.string().max(256).allow(""),
         last: Joi.string().min(2).max(256).required(),
       })
       .required(),
@@ -57,4 +57,4 @@ const validateUser = (user) => {
   return schema.validate(user);
 };
 
-module.exports = validateUser;
+module.exports = registerValidation;

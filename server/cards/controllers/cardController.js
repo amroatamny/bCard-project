@@ -1,7 +1,6 @@
 const { handleError } = require("../../utils/handleErrors");
 const normalizeCard = require("../helpers/normalizeCard");
 const validateCard = require("../models/joi/validateCard");
-const ladosh = require("lodash");
 const Card = require("../models/mongoose/Card");
 
 const getCards = async (req, res) => {
@@ -69,68 +68,27 @@ const editCard = async (req, res) => {
     handleError(res, 404, error);
   }
 };
-// const likeCard = async (req, res) => {
-//   try {
-//     const { cardId } = req.params;
-//     const userId = req.body.user_id;
-//     console.log(userId);
-//     const cardFromDB = await Card.findById(cardId);
-//     if (!cardFromDB)
-//       throw new Error(
-//         "Could not update this card because a card with this ID cannot be found in the database"
-//       );
-//     for (let i = 0; i < cardFromDB.likes.length; i++) {
-//       if (userId === cardFromDB.likes[i.valueOf(i)]) {
-//         const normalizeLikes = cardFromDB.likes.splice(i, i);
-//         console.log(normalizeLikes);
-//         const updatedCard = await Card.findByIdAndUpdate(
-//           cardId,
-//           { likes: normalizeLikes },
-//           { new: true }
-//         );
-//         return res.send(updatedCard);
-//       }
-//     }
-
-//     const normalizeLikes = cardFromDB.likes.push(userId);
-//     console.log(normalizeLikes);
-//     const updatedCard = await Card.findByIdAndUpdate(
-//       cardId,
-//       { likes: normalizeLikes },
-//       { new: true }
-//     );
-//     res.send(updatedCard);
-//   } catch (error) {
-//     handleError(res, 404, error);
-//   }
-// };
-
 const likeCard = async (req, res) => {
   try {
     const { cardId } = req.params;
     const userId = req.body.user_id;
-    const pipline = (userid) => {
-      const p = { $elemMatch: { likes: userid } };
-      console.log(p);
-      const push = { $push: { likes: userid } };
-      const pull = { $pull: { likes: userid } };
-      if (!p) return push;
+
+    const card = await Card.findById(cardId);
+    if (!card)
+      throw new Error("A card with this ID cannot be found in the database");
+
+    const pipline = (userID, card) => {
+      const push = { $push: { likes: userID } };
+      const pull = { $pull: { likes: userID } };
+      const cardLike = card.likes.find((id) => id === userID);
+      if (!cardLike) return push;
       return pull;
     };
-    // const pipline = {
-    //   $cond: {
-    //     if: { likes: { $elemMatch: userId } },
-    //     then: { $pull: { likes: userId } },
-    //     else: { $push: { likes: userId } },
-    //   },
-    // };
-    // console.log(pipline());
 
-    // const pipline = { $push: { likes: userId } };
     const configuration = { new: true };
     const CardFromDB = await Card.findByIdAndUpdate(
       cardId,
-      pipline(userId),
+      pipline(userId, card),
       configuration
     );
 
@@ -143,7 +101,6 @@ const likeCard = async (req, res) => {
     handleError(res, 404, error);
   }
 };
-
 const deleteCard = async (req, res) => {
   try {
     const { cardId } = req.params;
