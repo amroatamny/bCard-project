@@ -1,8 +1,10 @@
-const ENVIROMENT = process.env.ENVIROMENT || "dev";
-// const ENVIROMENT = "prod";
+const config = require("config");
+
+const ENVIROMENT = config.get("NODE_ENV");
 
 const connectToDb = () => {
-  if (ENVIROMENT == "dev") require("./mongodb/connectToMongoDBLocally");
-  if (ENVIROMENT == "prod") require("./mongodb/connectToAtlas");
+  if (ENVIROMENT === "development")
+    require("./mongodb/connectToMongoDBLocally");
+  if (ENVIROMENT === "production") require("./mongodb/connectToAtlas");
 };
 module.exports = connectToDb;

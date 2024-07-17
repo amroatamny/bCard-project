@@ -36,6 +36,9 @@ const getMyCards = async (req, res) => {
 const createCard = async (req, res) => {
   try {
     const card = req.body;
+    const user = req.user;
+    if (!user.isBusiness)
+      throw new Error("you must be Business user to create card");
     const { error } = validateCard(card);
     if (error)
       return handleError(
@@ -43,7 +46,7 @@ const createCard = async (req, res) => {
         400,
         "Joi Error : " + `${error.details[0].message}`
       );
-    const normalizedCard = normalizeCard(card, "663a4b60fde88147139317e6");
+    const normalizedCard = normalizeCard(card, user._id);
 
     const cardToDB = new Card(normalizedCard);
     const cardFromDb = await cardToDB.save();

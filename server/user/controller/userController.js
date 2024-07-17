@@ -1,3 +1,4 @@
+const { generateAuthToken } = require("../../auth/provider/jwt");
 const { handleError } = require("../../utils/handleErrors");
 const { comparePassword } = require("../helpers/bcypt");
 const normalizeUser = require("../helpers/normalizeUser");
@@ -43,7 +44,11 @@ const login = async (req, res) => {
     if (!isPasswordValid)
       throw new Error("authentication Error: invalid email or password");
 
-    res.send({ message: "success!!" });
+    const { _id, isBusiness, isAdmin } = userInDB;
+
+    const token = generateAuthToken({ _id, isBusiness, isAdmin });
+
+    res.send(token);
   } catch (error) {
     const isAuthError =
       error.message === "authentication Error: invalid email or password";
