@@ -1,0 +1,117 @@
+{
+  "cards": [
+    {
+      "title": "first card",
+      "subtitle": "first card",
+      "description": "first card",
+      "phone": "0503922297",
+      "email": "amro21aaa@gmail.com",
+      "image": {
+        "url": "",
+        "alt": ""
+      },
+      "address": {
+        "country": "telaviv",
+        "city": "baqa",
+        "street": "azaa",
+        "houseNumber": "21",
+        "zip": "12"
+      }
+    },
+    {
+      "title": "secound card",
+      "subtitle": "secound card",
+      "description": "secound card",
+      "phone": "0503922297",
+      "email": "malek@gmail.com",
+      "image": {
+        "url": "",
+        "alt": ""
+      },
+      "address": {
+        "country": "telaviv",
+        "city": "baqa",
+        "street": "azaa",
+        "houseNumber": "21",
+        "zip": "12"
+      }
+    },
+    {
+      "title": "thierd card",
+      "subtitle": "thierd card",
+      "description": "thierd card",
+      "phone": "0503922297",
+      "email": "bode@gmail.com",
+      "image": {
+        "url": "",
+        "alt": ""
+      },
+      "address": {
+        "country": "telaviv",
+        "city": "baqa",
+        "street": "azaa",
+        "houseNumber": "21",
+        "zip": "12"
+      }
+    }
+  ],
+  "users": [
+    {
+      "name": {
+        "first": "amro",
+        "middle": "wadea",
+        "last": "atamny"
+      },
+      "phone": "0545930129",
+      "email": "amroatamny9@gmail.com",
+      "password": "Aa12345!",
+      "image": {},
+      "address": {
+        "country": "telaviv",
+        "city": "baqa",
+        "street": "azaa",
+        "houseNumber": "21",
+        "zip": "1"
+      },
+      "isBusiness": true,
+      "isAdmin": true
+    },
+    {
+      "name": {
+        "first": "malek",
+        "middle": "wadea",
+        "last": "atamny"
+      },
+      "phone": "0545930129",
+      "email": "malekatamny9@gmail.com",
+      "password": "Aa12345!",
+      "image": {},
+      "address": {
+        "country": "telaviv",
+        "city": "baqa",
+        "street": "azaa",
+        "houseNumber": "21",
+        "zip": "1"
+      },
+      "isBusiness": true
+    },
+    {
+      "name": {
+        "first": "bode",
+        "middle": "wadea",
+        "last": "atamny"
+      },
+      "phone": "0545930129",
+      "email": "bodeatamny9@gmail.com",
+      "password": "Aa12345!",
+      "image": {},
+      "address": {
+        "country": "telaviv",
+        "city": "baqa",
+        "street": "azaa",
+        "houseNumber": "21",
+        "zip": "1"
+      }
+    }
+  ]
+}
